@@ -1,7 +1,8 @@
 import factory
 from faker import Faker
-from localstore.models import Product, Reorder
 from model_bakery import baker
+
+from localstore.models import Product, Reorder
 
 fake = Faker()
 

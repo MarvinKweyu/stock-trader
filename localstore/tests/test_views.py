@@ -1,61 +1,55 @@
 import json
 
-import factory
+# import factory
 import pytest
 from django.urls import reverse
-from localstore.models import Product, Reorder
-from localstore.serializers import ProductSerializer, ReorderSerializer
-from localstore.views import ProductViewSet, ReorderViewset
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APIRequestFactory, APITestCase
+
+from localstore.models import Product, Reorder
+from localstore.serializers import ProductSerializer, ReorderSerializer
+from localstore.views import ProductViewSet, ReorderViewset
 
 # Using the standard RequestFactory API to create a form POST request
 factory = APIRequestFactory()
 
 
 class ProductTestcase(APITestCase):
-
     def test_product_list(self):
-        url = reverse('products-list')
+        url = reverse("products-list")
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_product_detail(self):
         product = Product.objects.create(
-            name='Test Product',
-            price=100,
-            inventory=10,
-            re_order_level=5
+            name="Test Product", price=100, inventory=10, re_order_level=5
         )
-        url = reverse('products-detail', args=[product.id])
+        url = reverse("products-detail", args=[product.id])
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_product_create(self):
         # url = reverse('products-create')
         data = {
-            'name': 'Test Product',
-            'price': 100,
-            'inventory': 10,
-            're_order_level': 5
+            "name": "Test Product",
+            "price": 100,
+            "inventory": 10,
+            "re_order_level": 5,
         }
-        response = self.client.post('/api/v1/store/products/', data)
+        response = self.client.post("/api/v1/store/products/", data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_product_update(self):
         product = Product.objects.create(
-            name='Test Product',
-            price=100,
-            inventory=10,
-            re_order_level=5
+            name="Test Product", price=100, inventory=10, re_order_level=5
         )
-        url = reverse('products-detail', args=[product.id])
+        url = reverse("products-detail", args=[product.id])
         data = {
-            'name': 'Test Product',
-            'price': 100,
-            'inventory': 3,
-            're_order_level': 5
+            "name": "Test Product",
+            "price": 100,
+            "inventory": 3,
+            "re_order_level": 5,
         }
 
         # using viewset
@@ -71,9 +65,9 @@ class ProductTestcase(APITestCase):
         response = self.client.patch(url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        print('Database reorders', Reorder.objects.all())
+        print("Database reorders", Reorder.objects.all())
 
-        reorder_url = reverse('reorders-list')
+        reorder_url = reverse("reorders-list")
         reorder_response = self.client.get(reorder_url)
         print(json.loads(reorder_response.content))
         # self.assertEqual(json.loads(reorder_response.content), second)
@@ -86,7 +80,7 @@ class ProductTestcase(APITestCase):
 #     print(product.inventory)
 
 
-@ pytest.mark.django_db
+@pytest.mark.django_db
 def test_products_are_created(multiple_new_products):
     """
     Test that 10 new products are created
@@ -94,11 +88,12 @@ def test_products_are_created(multiple_new_products):
     assert Product.objects.count() == 10
 
 
-@ pytest.mark.django_db
+@pytest.mark.django_db
 def test_reorder_is_created_when_inventory_is_low(new_product):
 
     product = Product.objects.get(pk=1)
     print(product.inventory)
+
 
 #     aoo = User.objects.get(username='aoo')
 #     client = APIClient()

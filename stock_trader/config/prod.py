@@ -4,6 +4,7 @@ import os
 
 import dj_database_url
 import dotenv
+
 from stock_trader.settings.base import *
 
 env = os.environ.copy()
@@ -19,13 +20,15 @@ ALLOWED_HOSTS = ["my_domain"]
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.postgresql_psycopg2'),
-        'NAME': os.environ.get('SQL_DATABASE', 'stocktrader'),
-        'USER': os.environ.get('SQL_USER', 'retailer'),
-        'PASSWORD': os.environ.get('SQL_PASSWORD', 'retailer'),
-        'HOST': os.environ.get('SQL_HOST', 'localhost'),
-        'PORT': os.environ.get('SQL_PORT', '')
+    "default": {
+        "ENGINE": os.environ.get(
+            "SQL_ENGINE", "django.db.backends.postgresql_psycopg2"
+        ),
+        "NAME": os.environ.get("SQL_DATABASE", "stocktrader"),
+        "USER": os.environ.get("SQL_USER", "retailer"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "retailer"),
+        "HOST": os.environ.get("SQL_HOST", "localhost"),
+        "PORT": os.environ.get("SQL_PORT", ""),
     }
 }
 
@@ -37,8 +40,8 @@ CORS_ALLOWED_ORIGINS = [
 
 
 # gmail while domain account is set up
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")

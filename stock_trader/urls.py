@@ -13,21 +13,26 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from dj_rest_auth.registration.views import ConfirmEmailView, VerifyEmailView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-from dj_rest_auth.registration.views import VerifyEmailView, ConfirmEmailView
-
 urlpatterns = [
     path("api/v1/", include("api.urls")),
     path("admin/", admin.site.urls),
     # the confirmation should be before the registration
-    path("account-auth/registration/account-confirm-email/<str:key>/",
-         ConfirmEmailView.as_view(), name="account_confirm_email"),
+    path(
+        "account-auth/registration/account-confirm-email/<str:key>/",
+        ConfirmEmailView.as_view(),
+        name="account_confirm_email",
+    ),
     path("account-auth/registration/", include("dj_rest_auth.registration.urls")),
-    path("account-auth/account-confirm-email/", VerifyEmailView.as_view(),
-         name="account_email_verification_sent"),
-    path('api-auth/', include('rest_framework.urls')),
+    path(
+        "account-auth/account-confirm-email/",
+        VerifyEmailView.as_view(),
+        name="account_email_verification_sent",
+    ),
+    path("api-auth/", include("rest_framework.urls")),
 ]

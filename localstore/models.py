@@ -5,6 +5,7 @@ from django.db import models
 
 class Product(models.Model):
     """A single item in the store"""
+
     name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     # description = models.TextField()
@@ -18,14 +19,15 @@ class Product(models.Model):
 
 class Reorder(models.Model):
     """A reorder item"""
+
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 
     CHOICES = (
-        ('Proc', 'Processed'),
-        ('Pend', 'Pending'),
+        ("Proc", "Processed"),
+        ("Pend", "Pending"),
     )
-    status = models.CharField(max_length=4, choices=CHOICES, default='Pend')
+    status = models.CharField(max_length=4, choices=CHOICES, default="Pend")
     reorder_date = models.DateField(auto_now_add=True)
 
     def __str__(self):

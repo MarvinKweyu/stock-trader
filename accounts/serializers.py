@@ -1,23 +1,22 @@
-from rest_framework import serializers
-from django.contrib.auth import get_user_model
-
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
-
+from django.contrib.auth import get_user_model
 from rest_auth.registration.serializers import RegisterSerializer
+from rest_framework import serializers
+
 from accounts.models import CustomUser
 
 
 class MyCustomRegistrationSerializer(RegisterSerializer):
     CHOICES = (
-        ('W', 'Warehouse attendant'),
-        ('R', 'Retailer'),
+        ("W", "Warehouse attendant"),
+        ("R", "Retailer"),
     )
     role = serializers.ChoiceField(choices=CHOICES)
 
     def get_cleaned_data(self):
         data_dict = super().get_cleaned_data()
-        data_dict['role'] = self.validated_data.get('role', '')
+        data_dict["role"] = self.validated_data.get("role", "")
         return data_dict
 
 

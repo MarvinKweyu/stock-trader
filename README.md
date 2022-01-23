@@ -1,5 +1,8 @@
 # Stock Trader
 
+![Lint workflow](https://github.com/MarvinKweyu/stock-trader/actions/workflows/lint.yml/badge.svg?branch=main)
+[![Python](https://img.shields.io/badge/python-%7C3.7%7C3.8%7C3.9-green)](https://github.com/MarvinKweyu/stock-trader)
+
 > An API for an inventory management and re-order application
 
 ## Local setup
@@ -42,10 +45,29 @@ password: attendant2
 To make a product sale, make a `patch` request to the product endpoint , changing the product amount as needed.
 
 <br/>
+
 To make a dispatch from the warehouse, make a similar update request to tehe `reorder` endpoint **changing the status of the reorder.**
 
-## Test
+
+# Contribution
+
+To contribute to this project, please fork the repository and make a pull request.
+
+```bash
+pre-commit install
+```
+
+Run against all files
+```bash
+pre-commit run --all-files
+```
+## Tests
 
 ```bash
 pytest
 ```
+
+## More Documentation
+
+For development using django and articles around software engineering, please visit [TheGreenCodes](https://thegreencodes.com/).
+

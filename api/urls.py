@@ -1,13 +1,11 @@
-
-from django.urls import path, include
 from django.contrib import admin
-from accounts import urls
+from django.urls import include, path
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 from rest_framework.documentation import include_docs_urls
 
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
-
+from accounts import urls
 
 API_TITLE = "Stock Trader API"
 API_DESCRIPTION = "Stock management and re-ordering"
@@ -27,6 +25,5 @@ urlpatterns = [
     path("auth/", include("dj_rest_auth.urls")),  # api login
     path("accounts/", include("accounts.urls")),
     path("store/", include("localstore.urls")),
-    path("docs/", schema_view.with_ui("redoc",
-                                      cache_timeout=0), name="schema-redoc"),
+    path("docs/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
 ]
