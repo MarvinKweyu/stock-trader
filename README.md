@@ -3,7 +3,9 @@
 ![Lint workflow](https://github.com/MarvinKweyu/stock-trader/actions/workflows/lint.yml/badge.svg?branch=main)
 [![Python](https://img.shields.io/badge/python-%7C3.7%7C3.8%7C3.9-green)](https://github.com/MarvinKweyu/stock-trader)
 
-> An API for an inventory management and re-order application
+> An API for the inventory management of SME. A multiple-user type project mimic of a point of sale.
+
+This project handles inventory between an SME and a warehouse. It boasts of having different user type access and automatic restocking of items at a pre-defined level from the stall.
 
 ## Local setup
 
@@ -24,7 +26,7 @@ For documentation:
 
 
 
-## Current users:
+### Current users:
 
 **Retailer**
 
